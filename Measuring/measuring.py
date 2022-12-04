@@ -25,7 +25,7 @@ def show_image(title, image, destroy_all=True):
 #                 help="width of the left-most object in the image (in inches)")
 # args = vars(ap.parse_args())
 
-image = cv2.imread("testingImage.jpg")
+image = cv2.imread("../Images/kamyon.jpg")
 gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
 gray = cv2.GaussianBlur(gray, (7, 7), 0)
 
@@ -110,10 +110,10 @@ for c in cnts:
     dimB = dB / pixelsPerMetric
 
     # draw the object sizes on the image
-    cv2.putText(orig, "{:.2f}cm".format(dimA),
+    cv2.putText(orig, "{:.2f}cm".format(dimB),
                 (int(tltrX - 15), int(tltrY - 10)), cv2.FONT_HERSHEY_SIMPLEX,
                 0.65, (0, 0, 255), 2)
-    cv2.putText(orig, "{:.1f}cm".format(dimB),
+    cv2.putText(orig, "{:.1f}cm".format(dimA),
                 (int(trbrX + 10), int(trbrY)), cv2.FONT_HERSHEY_SIMPLEX,
                 0.65, (0, 0, 255), 2)
 
