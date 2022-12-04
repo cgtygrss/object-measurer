@@ -1,6 +1,6 @@
 # Scanning and Measuring Objects with Pyhton (OpenCV etc.)
 
-## Project has two parts;
+## Project has three parts;
 
 ### 1-) Fixing the distortion of a captured picture.
 
