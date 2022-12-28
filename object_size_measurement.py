@@ -27,7 +27,7 @@ def show_image(title, image, destroy_all=True):
 
 # load the image, convert it to grayscale, and blur it slightly
 # image = cv2.imread(args["image"])
-image = cv2.imread("Resources/example_01.png")
+image = cv2.imread("Resources/test.jpg")
 gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
 gray = cv2.GaussianBlur(gray, (7, 7), 0)
 
@@ -104,7 +104,7 @@ for c in cnts:
     # compute it as the ratio of pixels to supplied metric
     # (in this case, inches)
     if pixelsPerMetric is None:
-        pixelsPerMetric = dB / 2.4257
+        pixelsPerMetric = dB / 2.615
         print(pixelsPerMetric)
 
     # compute the size of the object
@@ -112,10 +112,10 @@ for c in cnts:
     dimB = dB / pixelsPerMetric
 
     # draw the object sizes on the image
-    cv2.putText(orig, "{:.2f}cm".format(dimA),
+    cv2.putText(orig, "{:.2f}cm".format(dimB),
                 (int(tltrX - 15), int(tltrY - 10)), cv2.FONT_HERSHEY_SIMPLEX,
                 0.65, (0, 0, 255), 2)
-    cv2.putText(orig, "{:.1f}cm".format(dimB),
+    cv2.putText(orig, "{:.1f}cm".format(dimA),
                 (int(trbrX + 10), int(trbrY)), cv2.FONT_HERSHEY_SIMPLEX,
                 0.65, (0, 0, 255), 2)
 
