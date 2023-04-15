@@ -1,11 +1,8 @@
-import cv2
-import numpy as np
-
-import Data.Object as dataObj
-import DrawGrid
-from PIL import Image
 import os
 
+import cv2
+from Logic.Grid import DrawGrid
+from PIL import Image
 
 #Directory of Images
 directory = "../../Images"
@@ -31,7 +28,7 @@ def EdgeDetection(param_img):
         # if the contour is not sufficiently large, ignore it
         if cv2.contourArea(cnt) < 10000:
             continue
-        cv2.polylines(img, [cnt], True, (255, 0, 0), 2)
+        cv2.polylines(img, [cnt], True, (0, 0, 255), 2)
         (x, y), (w, h), angle = cv2.minAreaRect(cnt)
         print(x, y)
         print(w, h)
@@ -42,10 +39,3 @@ def EdgeDetection(param_img):
 
 
 EdgeDetection(testImage)
-
-
-# for image in os.listdir(directory):
-#     EdgeDetection(image)
-#     cv2.waitKey(0)
-#     cv2.destroyAllWindows()
-

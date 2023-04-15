@@ -1,10 +1,8 @@
 import os
-
 import cv2
 import numpy as np
 import matplotlib.pyplot as plt
 import matplotlib.ticker as plticker
-import os
 
 
 # choose where to store images
@@ -18,12 +16,11 @@ except ImportError:
 
 
 def DrawGrid(param_img):
-    # Open image file
-    image = param_img
+
     my_dpi = 150.
 
     # Get the size of an Image
-    width, height = image.size
+    width, height = param_img.size
 
     # Set up figure
     fig = plt.figure(figsize=(float(width)/my_dpi, float(height)/my_dpi), dpi=my_dpi)
@@ -42,7 +39,7 @@ def DrawGrid(param_img):
     ax.grid(which='major', axis='both', linestyle='-', color='r')
 
     # Add the image
-    ax.imshow(image)
+    ax.imshow(param_img)
 
     # Find number of grid squares in x and y direction
     nx = abs(int(float(ax.get_xlim()[1]-ax.get_xlim()[0])/float(myInterval)))
@@ -51,4 +48,4 @@ def DrawGrid(param_img):
     print(nx)
     print(ny)
 
-    fig.savefig("grid.jpg")
+    fig.savefig(f"{path}/grid.jpg")
