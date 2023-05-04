@@ -1,6 +1,6 @@
 import cv2
 
-scale_percent = 40
+scale_percent = 60
 
 
 def resize_image(param_img):

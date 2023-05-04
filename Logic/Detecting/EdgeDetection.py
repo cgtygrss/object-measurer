@@ -1,10 +1,11 @@
 import cv2
-from PIL import Image
 
 
 def do_edge_detection(param_img):
     try:
         img = param_img
+
+        # gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
 
         # Apply thresholding in the gray image to create a binary image
         ret, thresh = cv2.threshold(img, 150, 255, 0)
@@ -18,10 +19,10 @@ def do_edge_detection(param_img):
 
         for cnt in contours:
             # if the contour is not sufficiently large, ignore it
-            # if cv2.contourArea(cnt) < 10000:
+            # if cv2.contourArea(cnt) < 100:
             #     continue
             # # remove if the contour is too large
-            # elif cv2.contourArea(cnt) > 1000000:
+            # if cv2.contourArea(cnt) > 1000000:
             #     continue
             contours_list.append(cnt)
             cv2.drawContours(img, [cnt], 0, (0, 255, 0), 2)

@@ -28,11 +28,11 @@ for item in image_directory_list:
         # Convert PIL Image to CV2
         converted_img = convert_image_to_cv2(img)
 
-        # Resize image
-        resized_img = resize_image(converted_img)
+        # # Resize image
+        # resized_img = resize_image(converted_img)
 
         # Apply canny edge detection
-        canny_img = do_canny_edge_detection(resized_img)
+        canny_img = do_canny_edge_detection(converted_img)
 
         # Apply edge detection to image and find contours
         img_cv2, contour_list = do_edge_detection(canny_img)
@@ -40,7 +40,7 @@ for item in image_directory_list:
         # Draw grid on detected image
         grid_img = draw_grid(img_cv2)
 
-        # Find intersection points of gid and image
+        # Find intersection points of grid and image
         horizontal_list, vertical_list = find_intersection(contour_list)
 
         # Measure object and save final image.
