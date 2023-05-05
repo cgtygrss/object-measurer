@@ -8,7 +8,7 @@
 
 ### 4-) Applying Canny edge detection.
 
-### 5-) Applying edge detection with finding contours. 
+### 5-) Finding contours. 
 
 ### 6-) Drawing grids on image.
 
