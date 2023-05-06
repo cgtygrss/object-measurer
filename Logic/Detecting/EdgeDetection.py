@@ -1,15 +1,11 @@
 import cv2
-from Logic.Grid import DrawGrid
-from PIL import Image
-from Logic.SpecifyIntersections import SpecifyIntersections
-from Logic.SaveFile import SaveFile
+import numpy as np
 
 
 def edge_detection(param_img):
     try:
-        img = cv2.imread(param_img)
         # convert the image to grayscale
-        gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+        gray = cv2.cvtColor(param_img, cv2.COLOR_BGR2GRAY)
 
         # Apply thresholding in the gray image to create a binary image
         ret, thresh = cv2.threshold(gray, 150, 255, 0)
@@ -29,9 +25,9 @@ def edge_detection(param_img):
             elif cv2.contourArea(cnt) > 1000000:
                 continue
             contours_list.append(cnt)
-            cv2.drawContours(img, [cnt], 0, (0, 255, 0), 2)
+            cv2.drawContours(param_img, [cnt], 0, (0, 255, 0), 2)
 
-        return img, contours_list
+        return param_img, contours_list
 
     except Exception as e:
         print(e)
