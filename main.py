@@ -4,6 +4,12 @@ from Logic.Detecting.Canny import *
 from Logic.SpecifyIntersections.SpecifyIntersections import *
 from Logic.Measuring.MeasureObject import *
 from Logic.ImageOperations.ImageOperations import *
+from Logic.CameraOperations.Camera.OpenCamera import *
+
+
+# Directory of Images
+first_path = "Images"
+
 
 # Directory of RefinedImages
 path = "RefinedImages"
@@ -18,35 +24,45 @@ scale_percent = 60
 image_directory_list = []
 
 
-for file in os.listdir("Images"):
-    image_directory_list.append("Images/" + file)
+async def main():
 
-for item in image_directory_list:
+    # open camera and take photos
+    await open_camera(first_path)
 
-    try:
-        # Remove background of the image
-        img = remove_background(item)
-        # Convert PIL Image to CV2
-        converted_img = convert_image_to_cv2(img)
+    for file in os.listdir("Images"):
+        image_directory_list.append("Images/" + file)
 
-        # Resize image
-        resized_img = resize_image(converted_img, scale_percent)
+    for item in image_directory_list:
 
-        # Apply canny edge detection
-        canny_img = canny(resized_img)
+        try:
+            # Remove background of the image
+            img = remove_background(item)
 
-        # Apply edge detection to image and find contours
-        img_cv2, contour_list = edge_detection(canny_img)
+            # Convert PIL Image to CV2
+            converted_img = convert_image_to_cv2(img)
 
-        # Draw grid on detected image
-        grid_img = draw_grid(img_cv2, grid_interval)
+            # Resize image
+            resized_img = resize_image(converted_img, scale_percent)
 
-        # Find intersection points of grid and image
-        horizontal_list, vertical_list = find_intersection(contour_list, grid_interval)
+            # Apply canny edge detection
+            canny_img = canny(resized_img)
 
-        # Measure object and save final image.
-        # Takes Image,ImageName,Image Saving Path, Horizontal Intersection List, Vertical Intersection List
-        measure_and_save(grid_img, item[7:], path, horizontal_list, vertical_list)
+            # Apply edge detection to image and find contours
+            img_cv2, contour_list = edge_detection(canny_img)
 
-    except Exception as ex:
-        print(ex)
+            # Draw grid on detected image
+            grid_img = draw_grid(img_cv2, grid_interval)
+
+            # Find intersection points of grid and image
+            horizontal_list, vertical_list = find_intersection(contour_list, grid_interval)
+
+            # Measure object and save final image.
+            # Takes Image,ImageName,Image Saving Path, Horizontal Intersection List, Vertical Intersection List
+            final_image = measure(grid_img, horizontal_list, vertical_list)
+
+            await save_image(final_image, item[7:], path)
+
+        except Exception as ex:
+            print(ex)
+
+asyncio.run(main())

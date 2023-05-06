@@ -70,7 +70,7 @@ def distance_calculate(p1, p2):
     return dis
 
 
-def measure_and_save(img, img_name, path, horizontal_list, vertical_list):
+def measure(img, horizontal_list, vertical_list):
     dist_x = get_distinct_x(horizontal_list)
     dist_y = get_distinct_y(vertical_list)
 
@@ -83,4 +83,4 @@ def measure_and_save(img, img_name, path, horizontal_list, vertical_list):
     img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
     img_pil = Image.fromarray(img)
 
-    save_image(img_pil, img_name, path)
+    return img_pil
