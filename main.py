@@ -1,14 +1,14 @@
 from Logic.Grid.DrawGrid import *
 from Logic.Detecting.EdgeDetection import *
+from Logic.Detecting.Canny import *
 from Logic.RemoveBackground.RemoveBackground import *
 from Logic.SpecifyIntersections.SpecifyIntersections import *
 from Logic.Measuring.MeasureObject import *
+from Logic.ResizeImage.ResizeImage import *
+from Logic.ConvertImage.ConvertImgToCV2 import *
 
 # Directory of RefinedImages
 path = "RefinedImages"
-
-# Directory of background image
-background_img = "Images/wall.jpg"
 
 # How much pixel blanks will be given after one grid.
 grid_interval = 5
@@ -21,16 +21,24 @@ for file in os.listdir("Images"):
 for item in image_directory_list:
 
     try:
-        # Remove shadows from image
-        without_shadow = shadow_remove(cv2.imread(item), cv2.imread(background_img))
+        # Remove background of the image
+        img = remove_background(item)
+        # Convert PIL Image to CV2
+        converted_img = convert_image_to_cv2(img)
+
+        # Resize image
+        resized_img = resize_image(converted_img)
+
+        # Apply canny edge detection
+        canny_img = canny(resized_img)
 
         # Apply edge detection to image and find contours
-        img_cv2, contour_list = edge_detection(without_shadow)
+        img_cv2, contour_list = edge_detection(canny_img)
 
         # Draw grid on detected image
         grid_img = draw_grid(img_cv2, grid_interval)
 
-        # Find intersection points of gid and image
+        # Find intersection points of grid and image
         horizontal_list, vertical_list = find_intersection(contour_list, grid_interval)
 
         # Measure object and save final image.
