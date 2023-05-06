@@ -1,11 +1,9 @@
 from Logic.Grid.DrawGrid import *
 from Logic.Detecting.EdgeDetection import *
 from Logic.Detecting.Canny import *
-from Logic.RemoveBackground.RemoveBackground import *
 from Logic.SpecifyIntersections.SpecifyIntersections import *
 from Logic.Measuring.MeasureObject import *
-from Logic.ResizeImage.ResizeImage import *
-from Logic.ConvertImage.ConvertImgToCV2 import *
+from Logic.ImageOperations.ImageOperations import *
 
 # Directory of RefinedImages
 path = "RefinedImages"
@@ -13,7 +11,12 @@ path = "RefinedImages"
 # How much pixel blanks will be given after one grid.
 grid_interval = 5
 
+# At what percentage will the image be resized?
+scale_percent = 60
+
+# The list we had to keep Images in it.
 image_directory_list = []
+
 
 for file in os.listdir("Images"):
     image_directory_list.append("Images/" + file)
@@ -27,7 +30,7 @@ for item in image_directory_list:
         converted_img = convert_image_to_cv2(img)
 
         # Resize image
-        resized_img = resize_image(converted_img)
+        resized_img = resize_image(converted_img, scale_percent)
 
         # Apply canny edge detection
         canny_img = canny(resized_img)
