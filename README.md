@@ -2,6 +2,10 @@
 
 ### 1-) Fixing the distortion of a captured picture.
 
-### 2-) Extracting an object to measure from an image.
+### 2-) Removing background from an image.
 
-### 3-) Measuring objects actual height,width according to picture.
+### 3-) Applying edge detection and drawing grid on image.
+
+### 4-) Specifying the intersection points between object's edges and grid.
+
+### 5-) Calculating distance between intersection points.
