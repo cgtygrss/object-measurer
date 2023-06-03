@@ -9,11 +9,13 @@ async def open_camera(path):
 
     while webcam.isOpened():
         try:
+            count = 1
             check, frame = webcam.read()
             cv2.imshow("Capturing", frame)
             key = cv2.waitKey(1)
             if key == ord('s'):
-                await save_image(image=frame, image_name="saved_image.jpg", path=path)
+                count = count + 1
+                await save_image(image=frame, image_name=f"saved_image{count}.jpg", path=path)
 
             elif key == ord('q'):
                 webcam.release()
