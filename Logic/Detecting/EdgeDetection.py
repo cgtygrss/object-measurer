@@ -26,7 +26,7 @@ def edge_detection(param_img):
             # if cv2.contourArea(cnt) > 1000000:
             #     continue
             contours_list.append(cnt)
-            cv2.drawContours(img, [cnt], 0, (0, 255, 0), 2)
+            cv2.drawContours(img, [cnt], 0, (0, 255, 0), 1)
 
             img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
 
