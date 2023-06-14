@@ -15,6 +15,7 @@ def convert_image_to_cv2(param_image):
 def remove_background(param_img):
     im = Image.open(param_img)
     output = remove(im, bgcolor=(255, 255, 255, 255)).convert('RGB')
+    output.save("test.png")
 
     return output
 

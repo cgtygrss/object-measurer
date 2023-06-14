@@ -118,9 +118,9 @@ def draw_lines_x(_img, x_coords, _color):
                     continue
             for j in range(i + 1, len(k)):
                 point2 = k[j]
-                if point2[1] - point1[1] >= 20:
+                if point2[1] - point1[1] >= 25:
                     print(f"{point1} {point2} : {point2[1] - point1[1]}")
-                    cv2.line(_img, point1, point2, rgb, 1)
+                    cv2.line(_img, point1, point2, rgb, 2)
                     cv2.putText(_img, f"{((point2[1] - point1[1]) * 0.1633):.2f}", point2, cv2.FONT_HERSHEY_SIMPLEX, 0.1, (255, 255, 255))
                     break
 
@@ -140,9 +140,9 @@ def draw_lines_y(_img, y_coords, _color):
                     continue
             for j in range(i + 1, len(k)):
                 point2 = k[j]
-                if point2[0] - point1[0] >= 20:
+                if point2[0] - point1[0] >= 25:
                     print(f"{point1} {point2} : {point2[0] - point1[0]}")
-                    cv2.line(_img, point1, point2, rgb, 1)
+                    cv2.line(_img, point1, point2, rgb, 2)
                     cv2.putText(_img, f"{((point2[0] - point1[0]) * 0.1633):.2f}", point2, cv2.FONT_HERSHEY_SIMPLEX, 0.1, (255, 255, 255))
                     break
 
@@ -153,18 +153,19 @@ def distance_calculate(p1, p2):
     return dis
 
 
+def draw_lines(_img, _l, _col):
+    for i in range(0, len(_l) - 1, 2):
+        point1 = tuple(_l[i])
+        point2 = tuple(_l[i + 1])
+        cv2.line(_img, point1, point2, _col, 5)
+
+
 def measure(img, horizontal_list, vertical_list):
     dist_x = get_distinct_x(horizontal_list)
     dist_y = get_distinct_y(vertical_list)
 
     x_coords = get_distinct_x_coords(horizontal_list, dist_x)
     y_coords = get_distinct_y_coords(vertical_list, dist_y)
-    # print(dist_x_coords)
-    # dist_y_coords =
-    # min_max_x = find_min_max_dot_x(horizontal_list, dist_x)
-    # same_dots_x = find_same_dots_on_x(horizontal_list, dist_x)
-    # same_dots_y = find_same_dots_on_y(vertical_list, dist_y)
-    # min_max_y = find_min_max_dot_y(vertical_list, dist_y)
 
     draw_lines_x(img, x_coords, color_blue)
     draw_lines_y(img, y_coords, color_yellow)

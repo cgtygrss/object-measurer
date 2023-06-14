@@ -1,3 +1,5 @@
+import cv2
+
 from Logic.Grid.DrawGrid import *
 from Logic.Detecting.EdgeDetection import *
 from Logic.Detecting.Canny import *
@@ -6,6 +8,9 @@ from Logic.Measuring.MeasureObject import *
 from Logic.ImageOperations.ImageOperations import *
 from Logic.CameraOperations.Camera.OpenCamera import *
 from Data import *
+import sys
+import numpy
+numpy.set_printoptions(threshold=sys.maxsize)
 
 
 # Directory of Images
@@ -16,10 +21,10 @@ first_path = "Images"
 path = "RefinedImages"
 
 # How much pixel blanks will be given after one grid.
-grid_interval = 5
+grid_interval = 10
 
 # At what percentage will the image be resized?
-scale_percent = 60
+scale_percent = 40
 
 # The list we had to keep Images in it.
 image_directory_list = []
@@ -46,10 +51,10 @@ async def main():
             resized_img = resize_image(converted_img, scale_percent)
 
             # Apply canny edge detection
-            canny_img = canny(resized_img)
+            # canny_img = canny(resized_img)
 
             # Apply edge detection to image and find contours
-            img_cv2, contour_list = edge_detection(canny_img)
+            img_cv2, contour_list = edge_detection(resized_img)
 
             # Draw grid on detected image
             grid_img = draw_grid(img_cv2, grid_interval)
@@ -57,6 +62,7 @@ async def main():
             # Find intersection points of grid and image
             horizontal_list, vertical_list = find_intersection(contour_list, grid_interval)
 
+            # print(contour_list)
             # Measure object and save final image.
             # Takes Image,ImageName,Image Saving Path, Horizontal Intersection List, Vertical Intersection List
             final_image = measure(grid_img, horizontal_list, vertical_list)
