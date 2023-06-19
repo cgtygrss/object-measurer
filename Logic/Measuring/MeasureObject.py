@@ -6,6 +6,11 @@ import random
 color_yellow = (0, 255, 255)
 color_blue = (255, 0, 0)
 
+r = random.randint(0, 200)
+g = random.randint(0, 200)
+b = random.randint(0, 200)
+rgb = [r, g, b]
+
 
 def get_distinct_x(xy_coords):
     dist_x = list()
@@ -92,7 +97,7 @@ def calculate_object_height_pixel_ratio(horizontal_list, object_height):
     return pixel_ratio
 
 
-def measure(img, horizontal_list, vertical_list):
+def measure(img, horizontal_list, vertical_list, pixel_ratio):
     dist_x = get_distinct_x(horizontal_list)
     dist_y = get_distinct_y(vertical_list)
 
