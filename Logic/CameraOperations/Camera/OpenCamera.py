@@ -10,6 +10,7 @@ async def open_camera(path):
 
     while webcam.isOpened():
         try:
+            count = 1
             check, frame = webcam.read()
             cv2.imshow("Capturing", frame)
             key = cv2.waitKey(1)

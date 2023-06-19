@@ -34,9 +34,6 @@ async def main():
     # open camera and take photos
     await open_camera(first_path)
 
-    height = int(input("Enter object Height : "))
-    pixel_ratio = 0
-
     for file in os.listdir("Images"):
         image_directory_list.append("Images/" + file)
 
@@ -67,7 +64,7 @@ async def main():
             # print(contour_list)
             # Measure object and save final image.
             # Takes Image,ImageName,Image Saving Path, Horizontal Intersection List, Vertical Intersection List
-            final_image = measure(grid_img, horizontal_list, vertical_list, pixel_ratio)
+            final_image = measure(grid_img, horizontal_list, vertical_list)
 
             await save_image(final_image, item[7:], path)
 
