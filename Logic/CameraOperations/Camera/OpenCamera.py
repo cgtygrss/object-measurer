@@ -14,7 +14,7 @@ async def open_camera(path):
             cv2.imshow("Capturing", frame)
             key = cv2.waitKey(1)
             if key == ord('s'):
-                await save_image(image=frame, image_name=f"saved_image{count}.jpg", path=path)
+                await save_image(image=frame, image_name=f"{count}.jpg", path=path)
                 count += 1
 
             elif key == ord('q'):

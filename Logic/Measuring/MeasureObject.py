@@ -62,9 +62,9 @@ def draw_lines_x(_img, x_coords, pixel_ratio):
             if point2[1] - point1[1] >= 25:
                 print(f"{point1} {point2} : {point2[1] - point1[1]}")
                 cv2.line(_img, point1, point2, rgb, 2)
-                distance = distance_calculate(point1, point2, pixel_ratio)
+                distance = distance_calculate_horizontal(point1, point2, pixel_ratio)
                 cv2.putText(_img, distance, point1, cv2.FONT_HERSHEY_COMPLEX, 0.5, (255, 0, 0))
-                break
+                continue
 
 
 def draw_lines_y(_img, y_coords, pixel_ratio):
@@ -79,21 +79,26 @@ def draw_lines_y(_img, y_coords, pixel_ratio):
             if point2[0] - point1[0] >= 25:
                 print(f"{point1} {point2} : {point2[0] - point1[0]}")
                 cv2.line(_img, point1, point2, rgb, 2)
-                distance = distance_calculate(point1, point2, pixel_ratio)
+                distance = distance_calculate_vertical(point1, point2, pixel_ratio)
                 cv2.putText(_img, distance, (point2[0] + 20, point2[1]), cv2.FONT_HERSHEY_COMPLEX, 0.5, (0, 0, 0))
 
 
-def distance_calculate(p1, p2, pixel_ratio):
+def distance_calculate_vertical(p1, p2, pixel_ratio):
     dis = f"{((p2[0] - p1[0]) * pixel_ratio):.2f}"
     return dis
 
 
-def calculate_object_height_pixel_ratio(horizontal_list, object_height):
-    distinct_x_values = get_distinct_x(horizontal_list)
-    min_x = min(distinct_x_values)
-    max_x = max(distinct_x_values)
+def distance_calculate_horizontal(p1, p2, pixel_ratio):
+    dis = f"{((p2[1] - p1[1]) * pixel_ratio):.2f}"
+    return dis
 
-    pixel_ratio = object_height / (max_x - min_x)
+
+def calculate_object_height_pixel_ratio(vertical_list, object_height):
+    distinct_y_values = get_distinct_y(vertical_list)
+    min_y = min(distinct_y_values)
+    max_y = max(distinct_y_values)
+
+    pixel_ratio = object_height / (max_y - min_y)
 
     return pixel_ratio
 
@@ -106,7 +111,7 @@ def measure(img, horizontal_list, vertical_list, pixel_ratio):
     y_coords = get_y_coords(vertical_list, dist_y)
 
     draw_lines_x(img, x_coords, pixel_ratio)
-    draw_lines_y(img, y_coords, pixel_ratio)
+    # draw_lines_y(img, y_coords, pixel_ratio)
 
     img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
     img_pil = Image.fromarray(img)

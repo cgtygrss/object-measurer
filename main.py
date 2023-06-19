@@ -50,10 +50,10 @@ async def main():
             converted_img = convert_image_to_cv2(img)
 
             # Resize image
-            resized_img = resize_image(converted_img, scale_percent)
+            # resized_img = resize_image(converted_img, scale_percent)
 
             # Apply edge detection to image and find contours
-            img_cv2, contour_list = edge_detection(resized_img)
+            img_cv2, contour_list = edge_detection(converted_img)
 
             # Draw grid on detected image
             grid_img = draw_grid(img_cv2, grid_interval)
@@ -62,7 +62,7 @@ async def main():
             horizontal_list, vertical_list = find_intersection(contour_list, grid_interval)
 
             if item == "Images/0.jpg":
-                pixel_ratio = calculate_object_height_pixel_ratio(horizontal_list, height)
+                pixel_ratio = calculate_object_height_pixel_ratio(vertical_list, height)
 
             # print(contour_list)
             # Measure object and save final image.
