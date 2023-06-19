@@ -6,6 +6,11 @@ import random
 color_yellow = (0, 255, 255)
 color_blue = (255, 0, 0)
 
+r = random.randint(0, 200)
+g = random.randint(0, 200)
+b = random.randint(0, 200)
+rgb = [r, g, b]
+
 
 def get_distinct_x(xy_coords):
     dist_x = list()
@@ -45,7 +50,7 @@ def get_distinct_y(xy_coords):
     return dist_y
 
 
-def draw_lines_x(_img, x_coords,pixel_lenght):
+def draw_lines_x(_img, x_coords, pixel_ratio):
     x_coords.sort()
     for k in x_coords:
         k.sort()
@@ -57,7 +62,8 @@ def draw_lines_x(_img, x_coords,pixel_lenght):
             if point2[1] - point1[1] >= 25:
                 print(f"{point1} {point2} : {point2[1] - point1[1]}")
                 cv2.line(_img, point1, point2, rgb, 2)
-                cv2.putText(_img, f"{((point2[1] - point1[1]) * 0.1633):.2f}", point1, cv2.FONT_HERSHEY_COMPLEX, 0.5, (255, 0, 0))
+                distance = distance_calculate(point1, point2, pixel_ratio)
+                cv2.putText(_img, distance, point1, cv2.FONT_HERSHEY_COMPLEX, 0.5, (255, 0, 0))
                 break
 
 
@@ -92,7 +98,7 @@ def calculate_object_height_pixel_ratio(horizontal_list, object_height):
     return pixel_ratio
 
 
-def measure(img, horizontal_list, vertical_list):
+def measure(img, horizontal_list, vertical_list, pixel_ratio):
     dist_x = get_distinct_x(horizontal_list)
     dist_y = get_distinct_y(vertical_list)
 
