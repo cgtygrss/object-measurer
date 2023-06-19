@@ -10,28 +10,27 @@ from Logic.CameraOperations.Camera.OpenCamera import *
 from Data import *
 import sys
 import numpy
-numpy.set_printoptions(threshold=sys.maxsize)
 
+numpy.set_printoptions(threshold=sys.maxsize)
 
 # Directory of Images
 first_path = "Images"
-
 
 # Directory of RefinedImages
 path = "RefinedImages"
 
 # How much pixel blanks will be given after one grid.
-grid_interval = 10
+grid_interval = 20
 
 # At what percentage will the image be resized?
 scale_percent = 40
+
 
 # The list we had to keep Images in it.
 image_directory_list = []
 
 
 async def main():
-
     # open camera and take photos
     await open_camera(first_path)
 
@@ -50,9 +49,6 @@ async def main():
             # Resize image
             resized_img = resize_image(converted_img, scale_percent)
 
-            # Apply canny edge detection
-            # canny_img = canny(resized_img)
-
             # Apply edge detection to image and find contours
             img_cv2, contour_list = edge_detection(resized_img)
 
@@ -61,6 +57,9 @@ async def main():
 
             # Find intersection points of grid and image
             horizontal_list, vertical_list = find_intersection(contour_list, grid_interval)
+
+            if item == "Images/0.jpg":
+                pixel_ratio = calculate_object_height_pixel_ratio(horizontal_list, height)
 
             # print(contour_list)
             # Measure object and save final image.
@@ -71,5 +70,6 @@ async def main():
 
         except Exception as ex:
             print(ex)
+
 
 asyncio.run(main())
