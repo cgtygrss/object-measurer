@@ -32,10 +32,11 @@ def get_horizontal_intersection_coords(coords, distinct_y_intersections):
     horizontal_intersection_coords = list()
     for j in distinct_y_intersections:
         distinct_y_coords = list()
-        for i in coords:
-            for k in i:
-                if i not in distinct_y_coords and k[0] == j:
-                    distinct_y_coords.append(k)
+        for i in range(len(coords)):
+            for k in range(len(coords[i])):
+                current_coordinate = [coords[i][k][0], coords[i][k][1]]
+                if current_coordinate not in distinct_y_coords and coords[i][k][0] == j:
+                    distinct_y_coords.append(current_coordinate)
             horizontal_intersection_coords.append(distinct_y_coords)
     return horizontal_intersection_coords
 
@@ -44,9 +45,10 @@ def get_vertical_intersection_coords(coords, distinct_x_intersections):
     vertical_intersection_coords = list()
     for j in distinct_x_intersections:
         distinct_x_coords = list()
-        for i in coords:
-            for k in i:
-                if i not in distinct_x_coords and k[1] == j:
-                    distinct_x_coords.append(k)
+        for i in range(len(coords)):
+            for k in range(len(coords[i])):
+                current_coordinate = [coords[i][k][0], coords[i][k][1]]
+                if current_coordinate not in distinct_x_coords and coords[i][k][1] == j:
+                    distinct_x_coords.append(current_coordinate)
             vertical_intersection_coords.append(distinct_x_coords)
     return vertical_intersection_coords

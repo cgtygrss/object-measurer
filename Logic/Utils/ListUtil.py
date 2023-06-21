@@ -7,3 +7,4 @@ def get_sub_lists(_list):
             sub_coordinates.append([x, y])
         unpacked_list.append(sub_coordinates)
     return unpacked_list
+
