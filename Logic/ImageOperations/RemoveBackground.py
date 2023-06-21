@@ -1,14 +1,7 @@
 import numpy as np
 from rembg import remove
 from PIL import Image
-
-
-def convert_image_to_cv2(param_image):
-    open_cv_image = np.array(param_image)
-    # Convert RGB to BGR
-    open_cv_image = open_cv_image[:, :, ::-1].copy()
-
-    return open_cv_image
+from Logic.Utils.ConvertUtil import convert_image_to_cv2
 
 
 def remove_background(param_img):

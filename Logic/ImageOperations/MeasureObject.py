@@ -1,13 +1,6 @@
 from PIL import Image
 import cv2
-import random
-
-
-def generate_random_color():
-    r = random.randint(0, 200)
-    g = random.randint(0, 200)
-    b = random.randint(0, 200)
-    return [r, g, b]
+from Logic.Utils.ColorUtil import generate_random_color
 
 
 def get_horizontal_intersection_coords(coords, distinct_y_intersections):

@@ -1,5 +1,5 @@
 import cv2
-from Logic.ImageOperations.RemoveBackground import convert_image_to_cv2
+from Logic.Utils.ConvertUtil import convert_image_to_cv2
 
 
 def save_image(image, image_name, path):
