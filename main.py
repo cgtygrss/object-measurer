@@ -3,7 +3,7 @@ import sys
 import numpy
 from Logic.CameraOperations.OpenCamera import open_camera
 from Logic.ImageOperations.EdgeDetection import edge_detection
-from Logic.ImageOperations.MeasureObject import calculate_object_height_pixel_ratio
+from Logic.ImageOperations.PixelRatio import calculate_object_height_pixel_ratio
 from Logic.ImageOperations.MeasureObject import measure
 from Logic.ImageOperations.RemoveBackground import remove_background
 from Logic.ImageOperations.SpecifyIntersections import find_intersections
@@ -47,7 +47,7 @@ def main():
             horizontal_list, vertical_list = find_intersections(contour_list, interval)
 
             if item == "Images/0.jpg":
-                pixel_ratio = calculate_object_height_pixel_ratio(vertical_list, height)
+                pixel_ratio = calculate_object_height_pixel_ratio(contour_list, interval, height)
 
             # Measure object and save final image.
             # Takes Image,ImageName,Image Saving Path, Horizontal Intersection List, Vertical Intersection List
