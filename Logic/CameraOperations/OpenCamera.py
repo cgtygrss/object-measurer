@@ -1,10 +1,9 @@
 import cv2
-from time import sleep
-from Logic.SaveFile.SaveFile import *
-import asyncio
+from Logic.SaveFile.SaveFile import save_image
 
 
-async def open_camera(path):
+def open_camera(path):
+    count = 0
     webcam = cv2.VideoCapture(0, cv2.CAP_DSHOW)
 
     while webcam.isOpened():
@@ -13,7 +12,8 @@ async def open_camera(path):
             cv2.imshow("Capturing", frame)
             key = cv2.waitKey(1)
             if key == ord('s'):
-                await save_image(image=frame, image_name="saved_image.jpg", path=path)
+                save_image(image=frame, image_name=f"{count}.jpg", path=path)
+                count += 1
 
             elif key == ord('q'):
                 webcam.release()
