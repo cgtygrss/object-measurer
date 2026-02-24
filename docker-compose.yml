@@ -1,0 +1,31 @@
+version: '3.8'
+
+services:
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    ports:
+      - "8000:8000"
+    environment:
+      - DATABASE_URL=sqlite+aiosqlite:///./measurer.db
+      - SECRET_KEY=${SECRET_KEY:-change-me-in-production}
+      - UPLOAD_DIR=./uploads
+      - RESULTS_DIR=./results
+      - CORS_ORIGINS=["http://localhost:8081","http://localhost:19006","http://localhost:3000"]
+    volumes:
+      - backend_uploads:/app/uploads
+      - backend_results:/app/results
+      - backend_db:/app
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+
+volumes:
+  backend_uploads:
+  backend_results:
+  backend_db:
