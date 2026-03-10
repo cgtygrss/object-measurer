@@ -1,0 +1,50 @@
+{
+  "expo": {
+    "name": "Object Measurer",
+    "slug": "object-measurer",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/images/icon.png",
+    "scheme": "object-measurer",
+    "userInterfaceStyle": "dark",
+    "newArchEnabled": true,
+    "splash": {
+      "image": "./assets/images/splash-icon.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#0A0A0F"
+    },
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "com.cagataygurses.objectmeasurer",
+      "infoPlist": {
+        "NSCameraUsageDescription": "Object Measurer needs camera access to measure objects in real-time.",
+        "NSPhotoLibraryUsageDescription": "Object Measurer needs photo library access to measure objects from saved photos."
+      }
+    },
+    "android": {
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/images/adaptive-icon.png",
+        "backgroundColor": "#0A0A0F"
+      },
+      "edgeToEdgeEnabled": true,
+      "package": "com.cagataygurses.objectmeasurer",
+      "permissions": [
+        "android.permission.CAMERA"
+      ]
+    },
+    "plugins": [
+      "expo-router",
+      [
+        "react-native-vision-camera",
+        {
+          "cameraPermissionText": "Object Measurer needs camera access to measure objects in real-time.",
+          "enableMicrophonePermission": false
+        }
+      ],
+      "expo-secure-store"
+    ],
+    "experiments": {
+      "typedRoutes": true
+    }
+  }
+}

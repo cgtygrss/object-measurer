@@ -1,0 +1,29 @@
+# FastAPI
+fastapi>=0.115.0
+uvicorn[standard]>=0.34.0
+python-multipart>=0.0.19
+
+# Database
+sqlalchemy[asyncio]>=2.0.36
+asyncpg>=0.30.0
+alembic>=1.14.0
+
+# Auth
+pyjwt>=2.10.0
+passlib[bcrypt]>=1.7.4
+bcrypt>=4.2.0
+
+# Image Processing (ported from existing project)
+opencv-python-headless>=4.10.0
+numpy>=2.1.0
+Pillow>=11.0.0
+rembg[cpu]>=2.0.68
+
+# Settings
+pydantic-settings>=2.7.0
+pydantic[email]>=2.10.0
+
+# Testing
+pytest>=8.3.0
+pytest-asyncio>=0.25.0
+httpx>=0.28.0

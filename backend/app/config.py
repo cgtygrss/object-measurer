@@ -1,0 +1,41 @@
+"""Application configuration using pydantic-settings."""
+
+from pydantic_settings import BaseSettings
+from functools import lru_cache
+
+
+class Settings(BaseSettings):
+    """Application settings loaded from environment variables."""
+
+    # App
+    APP_NAME: str = "Object Measurer API"
+    APP_VERSION: str = "1.0.0"
+    DEBUG: bool = False
+
+    # Database
+    DATABASE_URL: str = "postgresql+asyncpg://postgres:postgres@localhost:5432/object_measurer"
+
+    # JWT Auth
+    JWT_SECRET_KEY: str = "change-me-in-production-use-a-long-random-string"
+    JWT_ALGORITHM: str = "HS256"
+    JWT_EXPIRATION_MINUTES: int = 60 * 24 * 7  # 7 days
+
+    # CORS
+    CORS_ORIGINS: list[str] = ["*"]
+
+    # File Storage
+    UPLOAD_DIR: str = "uploads"
+    MAX_FILE_SIZE_MB: int = 10
+
+    # S3 (optional, for production)
+    AWS_ACCESS_KEY_ID: str = ""
+    AWS_SECRET_ACCESS_KEY: str = ""
+    AWS_S3_BUCKET: str = ""
+    AWS_REGION: str = "eu-central-1"
+
+    model_config = {"env_file": ".env", "env_file_encoding": "utf-8"}
+
+
+@lru_cache
+def get_settings() -> Settings:
+    return Settings()
